@@ -34,6 +34,7 @@ with other MTAs. Possibly, the only thing you need to change is the CHUID
 in its initscript.
 
 Requires: Python, python-milter
+
 To install, run `chmod +x install.sh && ./install.sh`
 
 1. copies initscript to /etc/init.d/pgpmilter
@@ -45,8 +46,8 @@ To install, run `chmod +x install.sh && ./install.sh`
 
 add to /etc/postfix/main.cf:
 
-	smtpd_milters = unix:/milter/pgpmilter.sock
-	milter_default_action = tempfail
+    smtpd_milters = unix:/milter/pgpmilter.sock
+    milter_default_action = tempfail
 
 ### Integration in other MTAs
 
@@ -67,6 +68,10 @@ Getting it
 ----------
 
     git clone git://github.com/moba/pgpmilter.git 
+
+or download the latest zip
+ 
+    https://github.com/moba/pgpmilter/zipball/master
 
 Based on
 --------
