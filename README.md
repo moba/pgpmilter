@@ -38,6 +38,21 @@ To install, run `chmod +x install.sh && ./install.sh`
 
 1. copies initscript to /etc/init.d/pgpmilter
 2. copies pgpmilter.py to /usr/local/bin
+3. creates rc.d symlinks
+4. runs /etc/init.d/pgpmilter
+
+### Integration in Postfix
+
+add to /etc/postfix/main.cf:
+
+	smtpd_milters = unix:/milter/pgpmilter.sock
+	milter_default_action = tempfail
+
+### Integration in other MTAs
+
+PGPMilter is preconfigured for Postfix, but can be easily altered to be used
+with other MTAs. Possibly, the only thing you need to change is the CHUID
+in its initscript.
 
 About Backscatter
 -----------------
