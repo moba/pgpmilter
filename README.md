@@ -2,7 +2,7 @@ pgpmilter
 ==========
 
 This is a very simple [milter](https://www.milter.org/) in Python
-using pymilter that rejects any non PGP mail.
+using pymilter that rejects any non-PGP mail.
 
 About Milters
 -------------
@@ -17,13 +17,14 @@ MTAs that support milters include
 [Postfix](http://www.postfix.org), and
 [qpsmtpd](http://smtpd.develooper.com/).
 
-This milter is part of a concept that requires mailservers to reject
-all PGP mail. I have no idea what you might want to use it for. It looks
+Functionality
+-------------
+
+This milter is part of a concept that requires mailservers to only 
+accept PGP mail. I have no idea what you might want to use it for. It looks
 for a PGP header in the body of a mail and once it finds one, it will
 ACCEPT the mail. After 5000 characters into scanning the body, 
-all mail is rejected (this is a config setting). Actually it might scan
-some more because pymilter reads the mail body in possibly larger
-chunks. 
+all mail is REJECTed. Actually it might scan some more because pymilter reads the mail body in possibly larger chunks.
 
 Installation
 ------------
