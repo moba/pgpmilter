@@ -1,0 +1,43 @@
+#! /bin/sh
+PATH=/sbin:/usr/sbin:/bin:/usr/bin
+DESC="PGPMilter"
+NAME=pgpmilter
+CHUID=postfix
+DAEMON=/usr/local/bin/$NAME.py
+DAEMON_OPTS=""
+PIDFILE=/var/run/$NAME.pid
+SCRIPTNAME=/etc/init.d/$NAME
+
+# This program goes in /etc/init.d/pgpmilter.
+# based on https://github.com/kragen/minimilter
+
+case "$1" in
+  start)
+        echo -n "Starting $DESC"
+	start-stop-daemon --start --quiet \
+            --make-pidfile \
+            --pidfile $PIDFILE \
+            --chuid $CHUID \
+            --background \
+            --exec "$DAEMON" -- $DAEMON_OPTS
+        echo "."
+	;;
+  stop)
+        echo -n "Stopping pgpmilter"
+	start-stop-daemon --stop --quiet \
+            --oknodo \
+            --retry 30 \
+            --pidfile $PIDFILE
+        echo "."
+	;;
+
+  reload|force-reload|restart)
+        $0 stop; sleep 1; $0 start
+	;;
+
+  *)
+	echo "Usage: /etc/init.d/pgpmilter {start|stop|reload|force-reload|restart}"
+	exit 1
+esac
+
+exit 0
